@@ -1,6 +1,6 @@
 # INSPECTRE
 
-We provide implementation of our private entropy estimators and private support coverage estimator in Python. This is a tutorial for the people who want to use or develop upon these estimators.
+We provide a Python implementation of our differentially private estimators of entropy and support coverage. This is a tutorial for anyone who wants to use or build upon these estimators.
 
 Table of contents
 =================
@@ -12,7 +12,7 @@ Table of contents
 
 Prerequisites
 =====
-This project works on Python3, and we use the package of [Numpy](http://www.numpy.org), the fundamental package for scientific computing with Python. We also use [matplotlib](https://matplotlib.org/index.html) for the plot. Before running the code, make sure Python3, Numpy and Matplotlib are properly installed. 
+This project is implemented in Python3, using [Numpy](http://www.numpy.org) and [matplotlib](https://matplotlib.org/index.html). Before running the code, make sure Python3, Numpy and Matplotlib are installed. Note that our code for entropy estimation is incompatible with Python2.
 
 * [Instruction for installing Python3](https://docs.python.org/3/using/index.html)
 * [Instruction for installing Numpy](https://www.scipy.org/install.html)
@@ -21,9 +21,10 @@ This project works on Python3, and we use the package of [Numpy](http://www.nump
 
 Entropy estimators
 ================
-In this project, we compare the performance of our private entropy estimator with a number of non-private estimators, which include the plug-in estimator, the Miller-Madow Estimator, and the sample optimal polynomial approximation estimator from the paper [Minimax Rates of Entropy Estimation on Large Alphabets via Best Polynomial Approximation](http://ieeexplore.ieee.org/abstract/document/7444171/). 
+In this project, we implement our estimators for private estimation of entropy, including a private version of the plug-in estimator, and a privatized estimator based on the method of best-polynomial approximation.
+We compare performance between these estimators and a number of non-private estimators, including the plug-in estimator, the Miller-Madow Estimator, and the sample optimal polynomial approximation estimator from the paper [Minimax Rates of Entropy Estimation on Large Alphabets via Best Polynomial Approximation](http://ieeexplore.ieee.org/abstract/document/7444171/). 
 
-We provide implementation of our private entropy estimators, including the private plug-in estimator and the private poly estimator. For the other non-private estimators, we simply borrow the code from the project [entropy](https://github.com/Albuso0/entropy) from github, Please see their project website for more information.
+Some of our code (including most of the file ```entropy.py``` and the file ```coeffs.txt```) is based off of the non-private estimators from the project [entropy](https://github.com/Albuso0/entropy) by [Yihong Wu](http://www.stat.yale.edu/~yw562/) and [Pengkun Yang](https://sites.google.com/site/pyangece/). 
 
 Comprehensive script
 ---------
@@ -39,7 +40,11 @@ We provide ```main_entropy.py``` as an example script for our private estimator.
 
 Support coverage estimator
 ================
-In this project, we compare the performance of our private estimator with [Smoothed Good-Toulmin estimator (SGT)]() on both synthetic data and real data. We provide implementation of our support coverage estimator which is a privatized version of their statistic. For the SGT, we borrow the code from which [SGT]() used for the experiment part.
+In this project, we implement our estimator for private estimation of support coverage.
+This is a privatized version of the Smoothed Good-Toulmin (SGT) estimator of [Alon Orlitsky](http://alon.ucsd.edu/), [Ananda Theertha Suresh](http://theertha.info/), and [Yihong Wu](http://www.stat.yale.edu/~yw562/), from their paper [Optimal prediction of the number of unseen species](http://www.pnas.org/content/113/47/13283?sid=c704d36c-5237-4425-84e4-498dcd5151b1).
+We compare the performance of the private and non-private statistics on both synthetic data and real-world data, including US Census name data and a text corpus from Shakespeare's Hamlet.
+
+Our implementation is based off the SGT implementation of Orlitsky, Suresh, and Wu, graciously provided to us by Ananda Theertha Suresh.
 
 Synthetic data 
 ---------
@@ -60,4 +65,4 @@ We provide ```main_real.py``` as an example for our private estimator. In this s
 
 Reference
 ================
-For detailed explanation of the estimator, please refer to our paper [INSPECTRE: Privately Estimating the Unseen]().
+For detailed explanations and analysis of our estimators, please refer to our paper [INSPECTRE: Privately Estimating the Unseen]().

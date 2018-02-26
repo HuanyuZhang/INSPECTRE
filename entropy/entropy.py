@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Main libraray for entropy estimation
+Main library for entropy estimation
+Based largely off the implementation of Wu and Yang: https://github.com/Albuso0/entropy/blob/master/entropy.py
 """
 
 import linecache
