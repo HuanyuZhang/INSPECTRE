@@ -24,7 +24,7 @@ Entropy estimators
 In this project, we implement our estimators for private estimation of entropy, including a private version of the plug-in estimator, and a privatized estimator based on the method of best-polynomial approximation.
 We compare performance between these estimators and a number of non-private estimators, including the plug-in estimator, the Miller-Madow Estimator, and the sample optimal polynomial approximation estimator from the paper [Minimax Rates of Entropy Estimation on Large Alphabets via Best Polynomial Approximation](http://ieeexplore.ieee.org/abstract/document/7444171/). 
 
-Some of our code (including most of the file ```entropy.py``` and the file ```coeffs.txt```) is based off of the non-private estimators from the project [entropy](https://github.com/Albuso0/entropy) by [Yihong Wu](http://www.stat.yale.edu/~yw562/) and [Pengkun Yang](https://sites.google.com/site/pyangece/). 
+Some of our code (including most of ```entropy.py``` and ```coeffs.txt```) is based off of the non-private estimators from the project [entropy](https://github.com/Albuso0/entropy) by [Yihong Wu](http://www.stat.yale.edu/~yw562/) and [Pengkun Yang](https://sites.google.com/site/pyangece/). 
 
 Comprehensive script
 ---------
