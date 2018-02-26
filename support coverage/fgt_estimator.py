@@ -1,7 +1,7 @@
 # Implements FGT estimator
+# Based off code of Orlitsky, Suresh, and Wu.
 
 import numpy as np
-#from mpmath import *
 
 
 def fgt_estimator(t,n):

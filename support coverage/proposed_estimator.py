@@ -4,6 +4,7 @@
 # r = the parameter for the estimator
 # maxfreq = maximum frequency of the underlying sample
 # attentuation = 1 always
+# Code from Orlitsky, Suresh, and Wu.
 
 import numpy as np
 import prob_coefficients as coeff

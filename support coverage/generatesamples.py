@@ -1,4 +1,5 @@
 # Generates n samples from the "distribution"
+# Code from Orlitsky, Suresh, and Wu.
 
 import numpy as np
 

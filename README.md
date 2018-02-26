@@ -44,7 +44,7 @@ In this project, we implement our estimator for private estimation of support co
 This is a privatized version of the Smoothed Good-Toulmin (SGT) estimator of [Alon Orlitsky](http://alon.ucsd.edu/), [Ananda Theertha Suresh](http://theertha.info/), and [Yihong Wu](http://www.stat.yale.edu/~yw562/), from their paper [Optimal prediction of the number of unseen species](http://www.pnas.org/content/113/47/13283?sid=c704d36c-5237-4425-84e4-498dcd5151b1).
 We compare the performance of the private and non-private statistics on both synthetic data and real-world data, including US Census name data and a text corpus from Shakespeare's Hamlet.
 
-Our implementation is based off the SGT implementation of Orlitsky, Suresh, and Wu, graciously provided to us by Ananda Theertha Suresh.
+Some of our code is based off the SGT implementation of Orlitsky, Suresh, and Wu, graciously provided to us by Ananda Theertha Suresh. Specific files used are indicated in comments, as well as ```hamlet_total.csv``` and ```lastnames_total.csv```.
 
 Synthetic data 
 ---------
@@ -60,7 +60,7 @@ Real data
 We provide ```main_real.py``` as an example for our private estimator. In this script, we compare performance for the estimators on real data. We use RMSE (root-mean-square error) to indicate the performance of the estimator.
 
 ### Program arguments
-* ```file_name string```: The name of the histogram file. The histogram file must be in ```.crv```, which has only one column and each row is the number of samples for each species.
+* ```file_name string```: The name of the histogram file. The histogram file must be in ```.csv```, which has only one column and each row is the number of samples for each species. We provide ```hamlet_total.csv``` and ```lastnames_total.csv``` as some examples.
 * ```eps_index list```: Set privacy parameter for the private estimators.
 
 Reference

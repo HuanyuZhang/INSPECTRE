@@ -3,6 +3,7 @@
 # with n samples and horizon t
 # freq is the input frequency
 # distribution is the underlying distribution.
+# Code from Orlitsky, Suresh, and Wu.
 
 import numpy as np
 import math as mt

@@ -18,7 +18,7 @@ from fgt_estimator import fgt_estimator as fgt
 from collections import Counter
 from linear_estimator_Laplace import linear_estimator_Laplace
 
-file_name = 'app_c_total.csv'
+file_name = 'lastnames_total.csv'
 eps_index = [2,1,0.5]
 
 np.random.seed(222)
@@ -28,7 +28,7 @@ minindex = 1
 iter = 100
 
 pt.figure()
-figname = 'appc_total_eps.pdf' 
+figname = 'lastnames_total_eps.pdf'
 
 for eps in eps_index:
     f = open(file_name, 'rt')

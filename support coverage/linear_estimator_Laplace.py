@@ -1,6 +1,7 @@
 # Given a private linear estimator "estimator" with n samples in the
 # prevalence form "prevalence" with maximum frequenccy maxfreq returns
 # the estimated number of unseen species in n*t samples.
+# Based off non-private estimator code from Orlitsky, Suresh, and Wu.
 
 import numpy as np
 from collections import Counter
