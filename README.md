@@ -44,7 +44,7 @@ In this project, we implement our estimator for private estimation of support co
 This is a privatized version of the Smoothed Good-Toulmin (SGT) estimator of [Alon Orlitsky](http://alon.ucsd.edu/), [Ananda Theertha Suresh](http://theertha.info/), and [Yihong Wu](http://www.stat.yale.edu/~yw562/), from their paper [Optimal prediction of the number of unseen species](http://www.pnas.org/content/113/47/13283?sid=c704d36c-5237-4425-84e4-498dcd5151b1).
 We compare the performance of the private and non-private statistics on both synthetic data and real-world data, including US Census name data and a text corpus from Shakespeare's Hamlet.
 
-Some of our code is based off the SGT implementation of Orlitsky, Suresh, and Wu, graciously provided to us by Ananda Theertha Suresh. Specific files used are indicated in comments, as well as ```hamlet_total.csv``` and ```lastnames_total.csv```.
+Some of our code is based off the SGT implementation of Orlitsky, Suresh, and Wu, graciously provided to us by Ananda Theertha Suresh. Specific files used are indicated in comments, and ```hamlet_total.csv``` is a reformatted version of a provided file. ```lastnames_total.csv``` is a subsampling of a file of [Frequently Occurring Surnames from the Census 2000](https://www.census.gov/topics/population/genealogy/data/2000_surnames.html).
 
 Synthetic data 
 ---------
