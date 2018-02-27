@@ -34,8 +34,12 @@ We provide ```main_entropy.py``` as an example script for our private estimator.
 
 * ```k int```: Set alphabet size. 
 * ```eps float```: Set privacy parameter eps.
-* ```l_degree int```: Set polynomial degree for private poly. Default *L=1.2 log k*.
+* ```l_degree int```: Set polynomial degree for private poly. Default *L=ceil(1.2 log k)*.
 * ```M_degree float```: set the right endpoint of approximation interval for private poly. Default *M=2.0 log k*.
+* ```N_degree int```: set the threshold to apply polynomial estimator for private poly. Default *M=floor(1.6*log(k))*.
+Threshold to apply polynomial estimator
+
+For the parameter of poly estimator, we just use the default parameter in their code, which is 
 
 
 Support coverage estimator

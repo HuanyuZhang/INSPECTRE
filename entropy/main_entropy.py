@@ -19,6 +19,7 @@ ydimsubplots = 3
 # parameter for Laplace polynomial estimator
 l_degree = math.ceil(1.2*log(k))
 M_degree = (2.0)*log(k)
+N_degree = math.floor(1.6*log(k))
 
 
 ## generate distributions
@@ -79,7 +80,7 @@ subtitle.append('Dirichlet-1/2 prior')
 temp = [-y * log(y)/log(2.0) for y in distribution]
 entropy_value.append(sum(temp))
 
-entropy = Entropy(k,L=l_degree,M=M_degree)
+entropy = Entropy(k,L=l_degree,M=M_degree,N=N_degree)
 entropy_laplace= Entropy(k)
 
 fig, ax = pt.subplots(xdimsubplots, ydimsubplots)
