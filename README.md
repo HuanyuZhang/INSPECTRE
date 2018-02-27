@@ -68,4 +68,4 @@ We provide ```main_real.py``` as an example for our private estimator. In this s
 
 Reference
 ================
-For detailed explanations and analysis of our estimators, please refer to our paper [INSPECTRE: Privately Estimating the Unseen]().
+For detailed explanations and analysis of our estimators, please refer to our paper [INSPECTRE: Privately Estimating the Unseen](), authored by [Jayadev Acharya](http://people.ece.cornell.edu/acharya/), [Gautam Kamath](http://www.gautamkamath.com/), Ziteng Sun, and Huanyu Zhang.
