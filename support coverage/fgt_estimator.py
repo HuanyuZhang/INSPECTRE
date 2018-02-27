@@ -1,6 +1,7 @@
 # Implements FGT estimator
 # Based off code of Orlitsky, Suresh, and Wu.
 
+# Implement the coefficient of good turing estimator
 import numpy as np
 
 

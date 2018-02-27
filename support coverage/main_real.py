@@ -1,3 +1,6 @@
+
+# eps_index = the privacy parameter, the script will plot the performance
+# of private estimator under all the eps
 # iter = number of iterations
 # maxindex = maximum value of t
 # minindex = minimum value of t
@@ -41,12 +44,12 @@ for eps in eps_index:
     k = len(totalfreq) # number of species
     ntotal = sum(totalfreq) # number of samples
 
-    index = np.arange(minindex,maxindex,1)
+    index = np.arange(minindex,maxindex,1) 
     x = [float(y)/maxindex for y in index]
-    z = [ntotal*(1-y) for y in x] 
+    z = [ntotal*(1-y) for y in x] # set for all the t 
 
-    Laplacemse = [0 for y in index]
-    SGTmse = [0 for y in index]
+    Laplacemse = [0 for y in index] # mse for private estimator
+    SGTmse = [0 for y in index] # mse for SGT
 
     expectedvalue = [0 for y in index]
 
@@ -85,12 +88,13 @@ for eps in eps_index:
             if(t > 1):
                 temp =  linear_estimator_Laplace(prevalence, prop(t,n,propr,maxfreq,1), n, t,maxfreq,propr,eps)
             else:
+                # case for private good turing estimator
                 add_noise = np.random.laplace(0,max(t,0.01)/eps,1)               
                 temp =  linear_estimator(prevalence, fgt(t,n),n,t,maxfreq)+np.asscalar(add_noise)
             temp = max(min(temp,n*t),0)  
             Laplacemse[j]+=((temp + totalseen- k)**2)
 
-
+    # average to get RMSE
     biasSGTmse = np.array( [np.sqrt(float(y/iter)) for (yt,y) in zip(z,SGTmse)])
     biasLaplacemse = np.array( [np.sqrt(float(y/iter)) for (yt,y) in zip(z,Laplacemse)])
 
@@ -99,6 +103,7 @@ for eps in eps_index:
         pt.plot(x,biasSGTmse, label = 'Non-private',linewidth = 2)
     pt.plot(x,biasLaplacemse, label = temp_label,linewidth = 2)
 
+    # parameter for the plot
     pt.xlim([float(1)/maxindex,1])
     pt.xlabel(xlab,fontsize = 10)
     pt.ylabel(ylab, fontsize = 10)

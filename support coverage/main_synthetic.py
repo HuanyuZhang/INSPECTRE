@@ -3,7 +3,7 @@
 # n = number of seen samples
 # k = support sie
 # iter = number of iterations
-
+# maxindex = max value for t
 import numpy as np
 import matplotlib.pyplot as pt
 import math as mt
@@ -85,6 +85,7 @@ for firstindex in range(0,xdimsubplots):
 
         distribution = distarray[firstindex*ydimsubplots + secondindex]
         for it in range(0,iter):
+            # generate and count samples
             freq = generatesamples(distribution,n)
             maxfreq = max(freq)
             prevalence = Counter(freq)
@@ -94,9 +95,9 @@ for firstindex in range(0,xdimsubplots):
                 #expected number of new species in next n*t examples
                 currexpected= expected(n,t,freq, distribution)
                 
-                # Parameters
+                # Parameters for estimators
                 sc = 1.0
-                tnew = max(t,1.001)
+                tnew = max(t,1.001) # make sure t>1
                 propr = float(sc*log(n*(tnew+1)*(tnew+1)/(tnew-1)))/(float(2*tnew))
                 tnew = t
                 atten = 1
@@ -104,8 +105,8 @@ for firstindex in range(0,xdimsubplots):
                 temp = linear_estimator(prevalence, prop(t,n,propr,maxfreq,atten),n,t,maxfreq)                
                 SGTmse[j]+= (temp - currexpected)**2
 
-                for i in range(eps_length): 
-                    # private estimator 
+                for i in range(eps_length): #loop for different eps
+                    # private estimator the sensitivity is bounded as 2.0 * (1+np.exp(r*(t-1)))
                     temp2 = temp+np.asscalar(np.random.laplace(0,(2.0 * (1+np.exp(propr*(t-1))))/eps_index[i],1))
                     # The estimator must be between 0 and n*t
                     temp2 = max(min(temp2,n*x[j]),0) 
@@ -113,13 +114,15 @@ for firstindex in range(0,xdimsubplots):
 
         biasSGTmse = np.array( [np.sqrt(float(y/iter))/(n*yt) for (yt,y) in zip(x,SGTmse)])
         
-        #plot rmse for both estimators
+        #plot rmse for non-private estimators
         ax[firstindex,secondindex].plot(x,biasSGTmse, label = 'Non-private',linewidth = 2)
+        #plot rmse for private estimators
         for i in range(eps_length):   
             biasLaplacemse = np.array( [np.sqrt(float(y/iter))/(n*yt) for (yt,y) in zip(x,Laplacemse[i])])
             temp_label = 'Private '+'eps='+str(eps_index[i])
             ax[firstindex,secondindex].plot(x,biasLaplacemse, label = temp_label, linewidth = 2)
 
+        # set parameter for plot
         ax[firstindex,secondindex].set_xlim([1,maxindex])
         ax[firstindex,secondindex].set_ylim(ymin=0)
         ax[firstindex,secondindex].set_title('%s' %(subtitle[firstindex*ydimsubplots+secondindex]), fontsize = 15)

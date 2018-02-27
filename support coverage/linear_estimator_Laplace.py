@@ -10,6 +10,8 @@ def linear_estimator_Laplace(prevalence,estimator,n,t,maxfreq,r,eps):
 	output = 0
 	for i in range(0,maxfreq):
 	    output += prevalence[i+1]*estimator[i]
+
+	#The sensitivity is bounded as 2.0 * (1+np.exp(r*(t-1)))
 	temp = 2.0 * (1+np.exp(r*(t-1)))
 	a = np.random.laplace(0,temp/eps,1)
-	return output + np.asscalar(a) # float(min(max(output,0),n*t))
+	return output + np.asscalar(a) 

@@ -22,7 +22,7 @@ M_degree = (2.0)*log(k)
 N_degree = math.floor(1.6*log(k))
 
 
-## generate distributions and compute its entropy
+# generate distributions and compute its entropy
 distarray = []
 subtitle = []
 entropy_value = []
@@ -80,8 +80,10 @@ subtitle.append('Dirichlet-1/2 prior')
 temp = [-y * log(y)/log(2.0) for y in distribution]
 entropy_value.append(sum(temp))
 
-entropy = Entropy(k,L=l_degree,M=M_degree,N=N_degree)
-entropy_laplace= Entropy(k)
+
+# set parameter for the estimators
+entropy_laplace = Entropy(k,L=l_degree,M=M_degree,N=N_degree)
+entropy= Entropy(k)
 
 fig, ax = pt.subplots(xdimsubplots, ydimsubplots)
 figname = 'entropy_'+'eps'+str(eps)+'k'+str(k)+'.pdf'
@@ -93,6 +95,7 @@ for firstindex in range(0,xdimsubplots):
         # z is the list of the number of samples we use to estimate the entropy
         z = [y*(int)(k/10) for y in index]
 
+        # list for recording mse for different estimators
         plug_mse = [0 for y in index]
         Miller_Madow_mse = [0 for y in index]
         poly_mse = [0 for y in index]
@@ -104,25 +107,30 @@ for firstindex in range(0,xdimsubplots):
             for i in range(0,maxindex):
                 n = z[i]
                 freq = generatesamples(distarray[firstindex*ydimsubplots+secondindex], n)
-                fin = hist_to_fin(freq)
+                fin = hist_to_fin(freq) # get profile from histogram
 
+                # plug in estimator
                 temp1 = entropy.estimate_plug(fin)
                 plug_mse[i]+= (temp1 - real_value[i])**2 
 
-                # the sensitivity is bounded as (2log(n)/n)
+                # the sensitivity of private plus in is bounded as (2log(n)/n)
                 noise = np.random.laplace(0,2.0/log(2)*log(n)/(eps*n),1)
                 plug_Laplace_mse [i] += (temp1 - real_value[i]+np.asscalar(noise))**2 
 
+                # Miller Madow estimator
                 Miller_Madow_mse[i] +=  (entropy.estimate_Miller_Madow(fin)-real_value[i])**2
 
-                (temp2,sensitivity) = entropy_laplace.estimate(fin)
+                # poly
+                (temp2,sensitivity) = entropy.estimate(fin)
                 poly_mse [i] += (temp2 - real_value[i])**2 
 
-                (temp2,sensitivity) = entropy.estimate(fin)
+                # private poly
+                (temp2,sensitivity) = entropy_laplace.estimate(fin)
                 noise = np.random.laplace(0,sensitivity/(eps) ,1)
 
                 poly_Laplace_mse [i] += (temp2 - real_value[i]+np.asscalar(noise))**2 
 
+        # average to get rmse
         plug_mse = [math.sqrt (float(y)/iter) for y in plug_mse]
         Miller_Madow_mse = [math.sqrt (float(y)/iter )for y in Miller_Madow_mse]
         poly_mse = [math.sqrt (float(y)/iter)for y in poly_mse]
@@ -143,7 +151,7 @@ for firstindex in range(0,xdimsubplots):
 
 ax[xdimsubplots-1,ydimsubplots-1].legend(bbox_to_anchor=(0.75,1.00))
 
-# make the unnecessary ticks unvisible
+# make the unnecessary ticks invisible
 pt.setp([a.get_xticklabels() for a in ax[0, :]], visible=False)
 pt.setp([a.get_yticklabels() for a in ax[:, ydimsubplots-1]], visible=False)
 pt.setp([a.get_yticklabels() for a in ax[:, ydimsubplots-2]], visible=False)
