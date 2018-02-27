@@ -22,7 +22,7 @@ M_degree = (2.0)*log(k)
 N_degree = math.floor(1.6*log(k))
 
 
-## generate distributions
+## generate distributions and compute its entropy
 distarray = []
 subtitle = []
 entropy_value = []
@@ -90,6 +90,7 @@ for firstindex in range(0,xdimsubplots):
     for secondindex in range(0,ydimsubplots):
 
         index = np.arange(1,maxindex+1,1)
+        # z is the list of the number of samples we use to estimate the entropy
         z = [y*(int)(k/10) for y in index]
 
         plug_mse = [0 for y in index]
@@ -108,6 +109,7 @@ for firstindex in range(0,xdimsubplots):
                 temp1 = entropy.estimate_plug(fin)
                 plug_mse[i]+= (temp1 - real_value[i])**2 
 
+                # the sensitivity is bounded as (2log(n)/n)
                 noise = np.random.laplace(0,2.0/log(2)*log(n)/(eps*n),1)
                 plug_Laplace_mse [i] += (temp1 - real_value[i]+np.asscalar(noise))**2 
 
@@ -133,8 +135,6 @@ for firstindex in range(0,xdimsubplots):
         ax[firstindex,secondindex].plot(z,poly_Laplace_mse, color = 'black', label = 'Poly-Laplace',linewidth = 2)
         ax[firstindex,secondindex].plot(z,plug_Laplace_mse, color = 'orange', label = 'Plug-in-Laplace',linewidth = 2)
 
-
-
         ax[firstindex,secondindex].set_title('%s' %(subtitle[firstindex*ydimsubplots+secondindex]), fontsize = 15)
         if (secondindex == 0):
             ax[firstindex,secondindex].set_ylabel('RMSE', fontsize = 17)
@@ -143,6 +143,7 @@ for firstindex in range(0,xdimsubplots):
 
 ax[xdimsubplots-1,ydimsubplots-1].legend(bbox_to_anchor=(0.75,1.00))
 
+# make the unnecessary ticks unvisible
 pt.setp([a.get_xticklabels() for a in ax[0, :]], visible=False)
 pt.setp([a.get_yticklabels() for a in ax[:, ydimsubplots-1]], visible=False)
 pt.setp([a.get_yticklabels() for a in ax[:, ydimsubplots-2]], visible=False)

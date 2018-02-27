@@ -70,13 +70,15 @@ class Entropy():
             if freq > self.n_threhold: # plug-in
                 p_hat = 1.*freq/num
                 h_estimate += (-p_hat*log(p_hat)+0.5/num)*cnt
-            else: # polynomial
+            else: # polynomial estimator
                 h_estimate += g_coeffs[freq]*cnt
+                # when we change one sample from this species, the entropy changes at most
                 sensitivity.append(2*np.abs(g_coeffs[freq]-g_coeffs[min(freq+1,self.n_threhold)]))
 
 
         h_estimate += 1.0*g_coeffs[0] * (self.k-sym_num)
         h_estimate = h_estimate if h_estimate > 0 else 0
+        # the sensitivity for the estimator is the max entropy change when we change only one sample
         return (h_estimate/log(2),max(sensitivity)/log(2))
 
     def estimate_Miller_Madow(self, fin):

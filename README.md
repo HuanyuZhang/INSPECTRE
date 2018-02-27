@@ -38,7 +38,7 @@ We provide ```main_entropy.py``` as an example script for our private estimator.
 * ```M_degree float```: Set the right endpoint of approximation interval for private poly. Default *M=2.0 log k*.
 * ```N_degree int```: Set the threshold to apply polynomial estimator for private poly. Default *M=1.6 log k*.
 
-For the parameter of poly estimator, we just use the default values in their code, which are *L=1.6 log k, M=3.5 log k, N=1.6 log k*. Please see [entropy](https://github.com/Albuso0/entropy) for more information.
+For the parameters of poly estimator, we just use the default values in their code, which are *L=1.6 log k, M=3.5 log k, N=1.6 log k*. Please see [entropy](https://github.com/Albuso0/entropy) for more information.
 
 
 Support coverage estimator
